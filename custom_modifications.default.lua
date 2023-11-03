@@ -1,7 +1,43 @@
 local cfg = oUF_Banaak_config
 oUF_Banaak_hooks = {}
 
+oUF_Banaak_hooks.PlayerHealth = {
+	sharedStyle = function(self, unit)
+		if unit == "player" then self:Tag(self.power, "[hpDetailed] || [ppDetailed]") end
+	end,
+}
 
+oUF_Banaak_hooks.HealthColored = {
+	UpdateHealth = function(self)
+		if self.unit == "player" and UnitHasVehicleUI("player") then
+			h, hMax = UnitHealth("pet"), UnitHealthMax("pet")
+		else
+			h, hMax = UnitHealth(self.unit), UnitHealthMax(self.unit)
+		end
+
+		if UnitIsConnected(self.unit) and not UnitIsGhost(self.unit) and not UnitIsDead(self.unit) then
+			for i = 1, 4 do
+				self.healthFill[5 - i]:SetVertexColor(1 - h / hMax, h / hMax, 0)
+			end
+		end
+	end,
+}
+
+oUF_Banaak_hooks.PlayerHealth = {
+	sharedStyle = function(self, unit)
+		if unit == "player" then self:Tag(self.power, "[hpDetailed] || [ppDetailed]") end
+	end,
+}
+
+oUF_Banaak_hooks.ClassHealth = {
+	UpdateHealth = function(self)
+		if UnitIsConnected(self.unit) and not UnitIsGhost(self.unit) and not UnitIsDead(self.unit) then
+			for i = self.unit:find("boss") and 4 or 1, 4 do
+				self.healthFill[5 - i]:SetVertexColor(RAID_CLASS_COLORS[select(2, UnitClass(self.unit))].r, RAID_CLASS_COLORS[select(2, UnitClass(self.unit))].g, RAID_CLASS_COLORS[select(2, UnitClass(self.unit))].b)
+			end
+		end
+end,
+}
 
 --[[
 
@@ -52,37 +88,3 @@ oUF_Banaak_hooks = {}
 
 ]]
 
-oUF_Banaak_hooks = {}
- 
-		oUF_Banaak_hooks.HealthColored = {
-			UpdateHealth = function(self)
-				if self.unit == "player" and UnitHasVehicleUI("player") then
-					h, hMax = UnitHealth("pet"), UnitHealthMax("pet")
-				else
-					h, hMax = UnitHealth(self.unit), UnitHealthMax(self.unit)
-				end
-
-				if UnitIsConnected(self.unit) and not UnitIsGhost(self.unit) and not UnitIsDead(self.unit) then
-					for i = 1, 4 do
-						self.healthFill[5 - i]:SetVertexColor(1 - h / hMax, h / hMax, 0)
-					end
-				end
-			end,
-		}
-		
-		
-				oUF_Banaak_hooks.PlayerHealth = {
-			sharedStyle = function(self, unit)
-				if unit == "player" then self:Tag(self.power, "[hpDetailed] || [ppDetailed]") end
-			end,
-		}
-		
-		oUF_Banaak_hooks.ClassHealth = {
-    UpdateHealth = function(self)
-        if UnitIsConnected(self.unit) and not UnitIsGhost(self.unit) and not UnitIsDead(self.unit) then
-            for i = self.unit:find("boss") and 4 or 1, 4 do
-                self.healthFill[5 - i]:SetVertexColor(RAID_CLASS_COLORS[select(2, UnitClass(self.unit))].r, RAID_CLASS_COLORS[select(2, UnitClass(self.unit))].g, RAID_CLASS_COLORS[select(2, UnitClass(self.unit))].b)
-            end
-        end
-    end,
-}

@@ -4,10 +4,6 @@ frame:SetScript("OnEvent", function(self, event)
 local oUF_Banaak = {}
 local cfg = oUF_Banaak_config
 
-
--- GLOBALS: oUF_player, oUF_pet, oUF_target, oUF_focus
--- GLOBALS: _G, MIRRORTIMER_NUMTIMERS, SPELL_POWER_HOLY_POWER, MAX_TOTEMS, MAX_COMBO_POINTS, DebuffTypeColor, SPEC_WARLOCK_DEMONOLOGY
--- GLOBALS: ToggleDropDownMenu, UnitIsUnit, GetTime, AnimateTexCoords, MirrorTimerColors, GetSpecialization, UnitHasVehicleUI, UnitHealth, UnitHealthMax, UnitPower, UnitIsDead, UnitIsGhost, UnitIsConnected, UnitAffectingCombat, GetLootMethod, UnitIsGroupLeader, UnitIsPVPFreeForAll, UnitIsPVP, UnitInRaid, IsResting, UnitAura, UnitCanAttack, UnitIsGroupAssistant, GetRuneCooldown, UnitClass, CancelUnitBuff, CreateFrame, IsAddOnLoaded, UnitFrame_OnEnter, UnitFrame_OnLeave
 local unpack = unpack
 local pairs = pairs
 local ipairs = ipairs
