@@ -1,0 +1,14 @@
+## Interface: 10200
+## Title: oUF_Banaak
+## Author: Banaak
+## Version: 4.0.311023
+## Dependencies: oUF
+## OptionalDeps: oUF_SpellRange
+## OptionalDeps: oUF_MovableFrames
+
+config.default.lua
+config.lua
+tags.lua
+custom_modifications.default.lua
+custom_modifications.lua
+banaak.lua
